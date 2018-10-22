@@ -2,14 +2,11 @@
 
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler, AbstractExceptionHandler
-from ask_sdk_core import attributes_manager
 from ask_sdk_core.utils import is_request_type, is_intent_name
 from ask_sdk_core.handler_input import HandlerInput
-from ask_sdk_model import Response, request_envelope
 
 import logging
 import six
-import requests
 
 sb = SkillBuilder()
 logger = logging.getLogger(__name__)
