@@ -8,6 +8,8 @@ from ask_sdk_core.handler_input import HandlerInput
 import logging
 import six
 
+from random import sample
+
 sb = SkillBuilder()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -17,8 +19,8 @@ class LaunchRequestHandler(AbstractRequestHandler):
 		return is_request_type("LaunchRequest")(handler_input)
 
 	def handle(self, handler_input):
-		speechText = "Hey! Hey! Exploradores!, espero estéis listos para una nueva aventura. ¿Cuántos objetos queréis buscar hoy?."
-		rePrompt = "Venga exploradores! A la aventura, ¿Cuantos objetos queréis buscar hoy?"
+		speechText = "<say-as interpret-as=\"interjection\">Hey Exploradores!</say-as>, espero estéis listos para una nueva aventura. ¿Cuántos objetos queréis buscar hoy?."
+		rePrompt = "<say-as interpret-as=\"interjection\">Venga exploradores!</say-as>. A la aventura, ¿Cuantos objetos queréis buscar hoy?"
 
 		return handler_input.response_builder.speak(speechText).ask(rePrompt).set_should_end_session(False).response
 
@@ -68,11 +70,19 @@ class ListItemsIntent(AbstractRequestHandler):
 	
 	def handle(self, handler_input):
 		slots = handler_input.request_envelope.request.intent.slots
+		defaultObjsToSearch = 3
 
 		for slotName, currentSlot in six.iteritems(slots):
-			print(slotName)
+			if slotName == 'numObj':
+				if currentSlot.value:
+					objsToSearch = sample(searchObjects, int(currentSlot.value))					
+				else:
+					objsToSearch = sample(searchObjects, defaultObjsToSearch)
+		speechText = "<say-as interpret-as=\"interjection\">Magnífico!</say-as>. Aquí van, prestad atención: {0}. A divertirse!. <say-as interpret-as=\"interjection\">Suerte!</say-as>.".format(", ".join(objsToSearch))
+		logger.info(objsToSearch)
+		logger.info(speechText)
 		
-		return handler_input.response_builder.speak("Test").response
+		return handler_input.response_builder.speak(speechText).response
 
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(HelpIntentHandler())
@@ -89,7 +99,7 @@ searchObjects = ["bandeja para hacer hielo",
 "altavoces",
 "mando de tv",
 "borrador",
-"camara fotografica",
+"camara fotográfica",
 "taza",
 "camiseta",
 "escritorio",
@@ -98,16 +108,16 @@ searchObjects = ["bandeja para hacer hielo",
 "bote de crema dental",
 "ipod",
 "muñeca",
-"periodico",
+"periódico",
 "mopa",
 "peine",
 "reloj de pulsera",
-"cordon de zapatilla",
+"cordón de zapatilla",
 "toalla",
 "esponja de ducha",
 "perfume",
 "calcetines",
-"tarjeta de felicitacion",
+"tarjeta de felicitación",
 "almohada",
 "alfombra",
 "ventana",
