@@ -27,7 +27,7 @@ if typing.TYPE_CHECKING:
 
 class PurchaseResult(Enum):
     """
-    Response from purchase directives:   * ACCEPTED - User have accepted the offer to purchase the product   * DECLINED - User have declined the offer to purchase the product   * NOT_ENTITLED - User tries to cancel/return a product he/she is  not entitled to.    * ALREADY_PURCHASED - User has already purchased the product   * ERROR - An internal error occurred 
+    Response from purchase directives:   * ACCEPTED - User have accepted the offer to purchase the product   * DECLINED - User have declined the offer to purchase the product   * NOT_ENTITLED - User tries to cancel/return a product he/she is  not entitled to.   * ALREADY_PURCHASED - User has already purchased the product   * ERROR - An internal error occurred 
 
 
 

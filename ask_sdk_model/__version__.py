@@ -13,8 +13,8 @@
 
 __pip_package_name__ = 'ask-sdk-model'
 __description__ = 'The ASK SDK Model package provides model definitions, for building Alexa Skills.'
-__url__ = 'https://github.com/alexa/alexa-skills-kit-sdk-for-python'
-__version__ = '1.2.0'
+__url__ = 'https://github.com/alexa/alexa-apis-for-python'
+__version__ = '1.4.0'
 __author__ = 'Alexa Skills Kit'
 __author_email__ = 'ask-sdk-dynamic@amazon.com'
 __license__ = 'Apache 2.0'

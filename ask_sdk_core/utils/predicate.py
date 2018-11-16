@@ -15,40 +15,13 @@
 # specific language governing permissions and limitations under the
 # License.
 #
-import sys
 import typing
 
 from ask_sdk_model import IntentRequest
 
-from .__version__ import __version__
-
 if typing.TYPE_CHECKING:
     from typing import Callable
-    from .handler_input import HandlerInput
-
-
-SDK_VERSION = __version__
-RESPONSE_FORMAT_VERSION = "1.0"
-
-
-def user_agent_info(custom_user_agent):
-    # type: (str) -> str
-    """Return the user agent info along with the SDK and Python
-    Version information.
-
-    :param custom_user_agent: Custom User Agent string provided by
-        the developer.
-    :type custom_user_agent: str
-    :return: User Agent Info string
-    :rtype: str
-    """
-    python_version = ".".join(str(x) for x in sys.version_info[0:3])
-    user_agent = "ask-python/{} Python/{}".format(
-        SDK_VERSION, python_version)
-    if custom_user_agent is None:
-        return user_agent
-    else:
-        return user_agent + " {}".format(custom_user_agent)
+    from ..handler_input import HandlerInput
 
 
 def is_intent_name(name):
